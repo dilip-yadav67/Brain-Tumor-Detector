@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Brain MRI Scan Reader – UI preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F6F4FF;--card:#fff;--ink:#1B1740;--sub:#5B5780;--track:#ECE9FA;--drop:#fff;--droph:#EFEBFF;
+--gl:#E5368B;--me:#F59E0B;--no:#10B981;--pi:#6D5DF6;box-sizing:border-box;
+padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15122E;--card:#211D45;--ink:#F1EEFF;--sub:#B4AEDB;--track:#34305E;--drop:#211D45;--droph:#2B2756}}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;line-height:1.5}
+.wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1rem 3rem}
+.hero{background:linear-gradient(120deg,#4F46E5 0%,#A23BEC 45%,#F0467F 80%,#FF8A3D 100%);border-radius:28px;padding:2.4rem 2.2rem 2rem;color:#fff;box-shadow:0 18px 40px -18px rgba(109,93,246,.6)}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;margin:0}
+.hero h1{font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;margin-bottom:.6rem}
+.hero p{max-width:46ch;margin:0 0 1.3rem;color:#FFF3FA;font-size:1.05rem}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{display:inline-flex;align-items:center;gap:.45rem;background:rgba(255,255,255,.95);color:#1B1740;border-radius:999px;padding:.35rem .85rem .35rem .6rem;font-weight:700;font-size:.85rem}
+.dot{width:.75rem;height:.75rem;border-radius:50%}
+.drop{margin-top:1.4rem;background:var(--drop);border:2.5px dashed var(--pi);border-radius:22px;padding:1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.drop:hover{background:var(--droph)}
+.drop b{display:block}.drop span{color:var(--sub);font-size:.9rem}
+.btn{background:var(--pi);color:#fff;border:0;border-radius:999px;padding:.6rem 1.3rem;font:700 .95rem 'DM Sans',sans-serif;cursor:pointer}
+.btn:focus-visible{outline:3px solid #FF8A3D;outline-offset:2px}
+.result{margin-top:1.4rem;border-radius:24px;padding:1.4rem 1.6rem;border:3px solid var(--me);background:color-mix(in srgb,var(--me) 14%,var(--card))}
+.tag{display:inline-block;background:var(--me);color:#1B1740;font-weight:700;border-radius:999px;padding:.25rem .8rem;font-size:.85rem;margin-bottom:.5rem}
+.result h2{font-weight:800;font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:.3rem}
+.result p{margin:0;color:var(--sub)}.conf{font-weight:700;margin-top:.6rem;font-size:1.05rem}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:1.4rem}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.hero{padding:1.6rem 1.3rem}}
+.panel{background:var(--card);border-radius:22px;padding:1.2rem;box-shadow:0 10px 28px -16px rgba(27,23,64,.35)}
+.panel h3{font-size:1.15rem}.sub{color:var(--sub);font-size:.9rem;margin:.1rem 0 .8rem}
+.scan{position:relative;aspect-ratio:1;border-radius:16px;overflow:hidden;background:#0a0a0a;
+background-image:radial-gradient(ellipse 40% 47% at 50% 50%,#b9b9b9 0 38%,#7a7a7a 52%,#3c3c3c 62%,#151515 64%),radial-gradient(ellipse 22% 30% at 50% 48%,#2a2a2a 0 60%,transparent 62%)}
+.scan::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 62% 38%,rgba(255,60,60,.9) 0,rgba(255,212,59,.65) 9%,rgba(139,224,78,.4) 17%,rgba(37,201,232,.28) 27%,transparent 38%)}
+.scan.plain::after{display:none}
+.scale{height:10px;border-radius:999px;margin-top:.8rem;background:linear-gradient(90deg,#2B3AE8,#25C9E8,#8BE04E,#FFD43B,#FF4D4D)}
+.sl{display:flex;justify-content:space-between;font-size:.8rem;color:var(--sub)}
+.bar{display:grid;grid-template-columns:130px 1fr 56px;gap:.7rem;align-items:center;margin:.55rem 0}
+@media(max-width:520px){.bar{grid-template-columns:100px 1fr 48px}}
+.bar b{font-size:.92rem}.track{background:var(--track);border-radius:999px;height:14px;overflow:hidden}
+.fill{height:100%;border-radius:999px}.val{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.notice{margin-top:1.4rem;background:#FFF4DB;border-left:6px solid var(--me);border-radius:14px;padding:.8rem 1.1rem;color:#5A3D00;font-size:.93rem}
+.pv{margin:1rem 0 0;color:var(--sub);font-size:.85rem;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <h1>Brain MRI Scan Reader</h1>
+    <p>Upload an MRI slice. The model names the most likely class and shows where on the scan it looked.</p>
+    <div class="legend">
+      <span class="chip"><span class="dot" style="background:var(--gl)"></span>Glioma</span>
+      <span class="chip"><span class="dot" style="background:var(--me)"></span>Meningioma</span>
+      <span class="chip"><span class="dot" style="background:var(--no)"></span>No tumor</span>
+      <span class="chip"><span class="dot" style="background:var(--pi)"></span>Pituitary tumor</span>
+    </div>
+  </div>
+
+  <div class="drop">
+    <div><b>Upload a brain MRI slice</b><span>JPG or PNG, up to 200 MB</span></div>
+    <button class="btn" type="button">Browse files</button>
+  </div>
+
+  <div class="result">
+    <span class="tag">Most likely result</span>
+    <h2>Meningioma</h2>
+    <p>A tumor in the meninges, the membranes covering the brain.</p>
+    <div class="conf">Confidence: 94.2%</div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h3>Your scan</h3><div class="sub">Image as uploaded</div>
+      <div class="scan plain" role="img" aria-label="Sample MRI slice"></div>
+    </div>
+    <div class="panel">
+      <h3>Where the model looked</h3><div class="sub">Warm colors mark areas that influenced the result most</div>
+      <div class="scan" role="img" aria-label="Sample heatmap overlay"></div>
+      <div class="scale"></div>
+      <div class="sl"><span>Less influence</span><span>More influence</span></div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:1.4rem">
+    <h3>How the model scored each class</h3><div class="sub">All four scores add up to 100%</div>
+    <div class="bar"><b>Meningioma</b><div class="track"><div class="fill" style="width:94.2%;background:var(--me)"></div></div><span class="val">94.2%</span></div>
+    <div class="bar"><b>Glioma</b><div class="track"><div class="fill" style="width:3.9%;background:var(--gl)"></div></div><span class="val">3.9%</span></div>
+    <div class="bar"><b>Pituitary tumor</b><div class="track"><div class="fill" style="width:1.4%;background:var(--pi)"></div></div><span class="val">1.4%</span></div>
+    <div class="bar"><b>No tumor</b><div class="track"><div class="fill" style="width:0.5%;background:var(--no)"></div></div><span class="val">0.5%</span></div>
+  </div>
+
+  <div class="notice"><b>For learning only.</b> This is a student project, not a medical device. It cannot diagnose anything. Please see a qualified doctor for any health concern.</div>
+  <p class="pv">Preview with sample data. The scan shown is an illustration, not a real MRI.</p>
+</div>
+</body>
+</html>
